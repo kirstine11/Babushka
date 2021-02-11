@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="">
 
@@ -6,32 +5,37 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style02.css">
 </head>
 
+<header>
+    <h2 class="navn"></h2>
+
+</header>
+
 <body>
-    <button>tilbage</button>
+
     <article class="ret">
         <img src="" alt="" class="billede">
         <h2 class="navn"></h2>
         <p class="pris"></p>
-        <p class="kategori"></p>
+        <!--        <p class="kategori"></p>-->
         <p class="kortbeskrivelse"></p>
-        <p class="langbeskrivelse"></p>
-        <p class="oprindelsesregion"></p>
+        <!--        <p class="langbeskrivelse"></p>-->
 
 
 
-
+        <button>Tilbage</button>
 
     </article>
 
+
     <script>
         const urlParams = new URLSearchParams(window.location.search);
-        const id = urlParams.get("_id");
+        const id = urlParams.get("id");
 
         const medieurl = "https://babushka-dd8a.restdb.io/media/";
-        let menu;
+        let ret;
         const myHeaders = {
             "x-apikey": "600ec2fb1346a1524ff12de4"
         }
@@ -40,23 +44,31 @@
         document.addEventListener("DOMContentLoaded", loadJSON);
 
         async function loadJSON() {
-            const JSONData = await fetch(`https://babushka-dd8a.restdb.io/rest/menu${_id}`, {
+            const JSONData = await fetch(`https://babushka-dd8a.restdb.io/rest/menu/${id}`, {
                 headers: myHeaders
             });
-            menu = await JSONData.json();
-            visMenu(menu);
+            ret = await JSONData.json();
+            console.log("retter", ret);
+
+            visRet(ret);
         }
 
-        function visMenu();
-        () {
-            document.querySelector(".navn").textContent = menu.navn;
-            document.querySelector(".billede").src = medieurl + menu.billede;
-            document.querySelector("button").addEventListener("click", tilbageTilMenu);
+        function visRet() {
+            document.querySelector(".navn").textContent = ret.navn;
+            document.querySelector(".billede").src = medieurl + ret.billede;
+            document.querySelector(".kortbeskrivelse").textContent = ret.kortbeskrivelse;
+            document.querySelector(".pris").textContent = `Pris: ${ret.pris},-`;
+
+
+            document.querySelector("button").addEventListener("click", tilbageTilRet);
 
         }
 
-        function tilbageTilMenu() {
+        function tilbageTilRet() {
             history.back();
         }
+
     </script>
-</body></html>
+</body>
+
+</html>

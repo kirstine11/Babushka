@@ -1,0 +1,70 @@
+body {
+    background-color: #e5e0cf;
+}
+
+.ret .billede {
+    width: 50%;
+    border-radius: 10vh;
+    border: #aa4747;
+    border-style: double;
+}
+
+button {
+    background: #e5e0cf;
+    border: none;
+    font-size: 2rem;
+    font-family: monospace;
+    color: #aa4747;
+    display: flex;
+    justify-content: flex-end;
+}
+
+button:hover {
+    color: #dbd2b4;
+
+}
+
+h2 {
+    color: #dbd2b4;
+    font-family: cursive;
+}
+
+
+
+header {
+    overflow: hidden;
+    background-color: #aa4747;
+}
+
+header {
+    background-color: #aa4747;
+    /*    padding: 10px;*/
+    border: none;
+
+
+}
+
+header h1 {
+    float: left;
+    color: #b0d3f2;
+
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 15px;
+
+
+}
+
+
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.pris {
+    color: #aa4747;
+    font-family: cursive;
+}

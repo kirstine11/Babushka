@@ -3,6 +3,10 @@ img {
     border-radius: 15px;
 }
 
+.ret:hover {
+    background-color: #ebe7da;
+}
+
 header {
     max-height: 55vh;
     overflow: hidden;
@@ -15,12 +19,11 @@ header {
 nav {
     overflow: hidden;
     background-color: white;
-    position: sticky;
 }
 
 button {
     background-color: white;
-    padding: 10px;
+    /*    padding: 10px;*/
     border: none;
 
 
@@ -35,16 +38,12 @@ nav button {
     text-decoration: none;
     font-size: 15px;
 
+
 }
 
 nav button:hover {
     background-color: #dbd2b4;
     color: white;
-}
-
-nav button.active {
-    background-color: #4CAF50;
-    color: rgba(255, 255, 255, 0);
 }
 
 .sticky {
@@ -53,13 +52,6 @@ nav button.active {
     width: 100%;
 }
 
-.content {
-    padding: 16px;
-}
-
-.sticky + .content {
-    padding-top: 60px;
-}
 
 main {
 
