@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="style.css">
+
+
+
+</head>
+
+<header>
+    <nav>
+
+        <div id="nav">
+
+            <button data-kategori="alle" class="valgt">Alle</button>
+            <button data-kategori="forretter">Forretter</button>
+            <button data-kategori="hovedretter"> Hovedretter</button>
+            <button data-kategori="desserter">Desserter</button>
+            <button data-kategori="drikkevarer">Drikkevarer</button>
+
+
+
+        </div>
+
+
+
+
+    </nav>
+</header>
+
+
+
+
+<img src="bAB.png" alt="bab" style="width:100%">
+<h2>Se menuen</h2>
+
+
+<body>
+
+    <h1>Alle</h1>
+
+    <main>
+
+        <template>
+            <article class="ret">
+                <img src="" alt="" class="billede">
+                <h2 class="navn"></h2>
+                <p class="pris"></p>
+                <p class="kategori"></p>
+                <p class="kortbeskrivelse"></p>
+                <p class="langbeskrivelse"></p>
+                <p class="oprindelsesregion"></p>
+
+
+
+
+
+            </article>
+        </template>
+    </main>
+    <footer>
+        <p>info@Babushka.com.</p>
+
+        <form id="footer_form">
+            <input id="email" placeholder="EMAIL" type="email" name="email" required>
+            <button id="subscribe">SUBSCRIBE</button>
+        </form>
+
+        <section id="footer_text">
+            <p> Handelsbetingelser</p>
+            <p> Privatlivs- og cookiepolitik</p>
+            <p>Oftest stillede spørgsmål</p>
+            <p>Job & Karriere</p>
+        </section>
+
+        <p id="rights">VIBORGGADE 14, KØBENHAVN</p>
+    </footer>
+
+
+    <script>
+        const header = document.querySelector(" h1");
+        const url = "https://babushka-dd8a.restdb.io/rest/menu";
+        const medieurl = "https://babushka-dd8a.restdb.io/media/";
+
+        const options = {
+            headers: {
+                'x-apikey': "600ec2fb1346a1524ff12de4"
+            }
+        };
+
+        let menu;
+        let filter = "alle";
+
+
+        const filterKnapper = document.querySelectorAll("nav button");
+        filterKnapper.forEach(knap => knap.addEventListener("click", filtrerMenu));
+
+        function filtrerMenu() {
+            filter = this.dataset.kategori;
+            document.querySelector(".valgt").classList.remove("valgt");
+            this.classList.add("valgt")
+
+            hentData();
+            header.textContent = this.textContent;
+        }
+
+
+        async function hentData() {
+            const respons = await fetch(url, options);
+            const json = await respons.json();
+            vis(json);
+        }
+
+        const main = document.querySelector("main");
+        const template = document.querySelector("template").content;
+
+        function vis(json) {
+            console.log(json);
+            main.textContent = "";
+            json.forEach(menu => {
+                if (filter == menu.kategori || filter == "alle") {
+                    const klon = template.cloneNode(true);
+                    klon.querySelector(".billede").src = medieurl + menu.billede;
+                    klon.querySelector(".navn").textContent = menu.navn;
+                    klon.querySelector(".pris").textContent = `Pris: ${menu.pris},-`;
+                    klon.querySelector(".kategori").textContent = menu.kategori;
+                    klon.querySelector(".kortbeskrivelse").textContent = menu.kortbeskrivelse;
+                    klon.querySelector(".oprindelsesregion").textContent = menu.oprindelsesregion;
+                    klon.querySelector(".langbeskrivelse").textContent = menu.langbeskrivelse;
+                    klon.querySelector(".ret").addEventListener("click", () => visDetaljer(menu));
+
+                    main.appendChild(klon);
+                }
+            })
+        }
+
+        function visDetaljer(menu) {
+            location.href = `02-ekstra.html?id=${menu._id}`;
+        }
+        hentData();
+
+        window.onscroll = function() {
+            myFunction()
+        };
+
+        var nav = document.getElementById("nav");
+
+        var sticky = nav.offsetTop;
+
+        function myFunction() {
+            if (window.pageYOffset >= sticky) {
+                nav.classList.add("sticky")
+            } else {
+                nav.classList.remove("sticky");
+            }
+        }
+    </script>
+</body></html>
